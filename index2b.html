@@ -13,48 +13,51 @@
 
   <script>
     // Reemplaza con la dirección de tu contrato desplegado
-    const direccionContrato = "0xTU_DIRECCION_CONTRATO";
+    const direccionContrato = "0x5c432a795d2aDC085b953604362c897083Fc9b89";
 
     // Reemplaza con tu ABI copiado desde Remix
+       
+    //asdasd
     const abi = [
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "_mensajeInicial",
-            "type": "string"
-          }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
-        "inputs": [],
-        "name": "mensaje",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "_nuevoMensaje",
-            "type": "string"
-          }
-        ],
-        "name": "actualizarMensaje",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      }
-    ];
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_nuevoMensaje",
+				"type": "string"
+			}
+		],
+		"name": "actualizarMensaje",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_mensajeInicial",
+				"type": "string"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "mensaje",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+    //asdasd
 
     let web3;
     let contrato;

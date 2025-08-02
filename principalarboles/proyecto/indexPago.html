@@ -1,0 +1,50 @@
+  <!DOCTYPE html>
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      <title>R3foresta Credits</title>
+    </head>
+    
+    <body>
+    <script src="../js/authController.js"></script>
+    <script>
+        if (!AuthController.checkAuth()) {
+        }
+    </script>
+      <section class="section__container contract__container" id="contract">
+        
+        <div class="contract__actions">
+          
+          
+          <div class="action-cards">
+            <div class="action-card">
+              <button class="action-toggle" data-target="buyForm">
+                <span><i class="ri-shopping-bag-line"></i> Comprar Bonos</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="buyForm" class="action-form hidden">
+                <div class="form-group">
+                  <label for="bonoAmount">Cantidad de Bonos en Toneladas:</label>
+                  <input type="number" id="bonoAmount" min="1" value="1">
+                </div>
+                <div class="form-group">
+                  <label for="paymentWallet">Wallet de Pago:</label>
+                  <input type="text" id="paymentWallet" placeholder="0x...">
+                </div>
+                <div class="form-group">
+                  <p class="price-estimate">Precio estimado: <span id="buyPriceEstimate">0</span> ETH</p>
+                </div>
+                <button class="btn btn--primary" id="submitBuy">
+                  <i class="ri-check-line"></i> Confirmar Compra
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      
+  </html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R3foresta Credits - Gestión de Huella de Carbono</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --secondary: #f9a825;
+      --light: #f1f8e9;
+      --dark: #1b5e20;
+      --gray: #e0e0e0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+    }
+    
+    header h1 {
+      color: var(--dark);
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    header p {
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card h2 {
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--secondary);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid var(--gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    
+    input[type="number"]:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+    }
+    
+    .info-box {
+      background-color: var(--light);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+    
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 20px;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .stat-card h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .chart-container {
+      height: 400px;
+      margin-top: 20px;
+      position: relative;
+    }
+    
+    .footprint-history {
+      margin-top: 30px;
+    }
+    
+    .history-title {
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .history-item {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+    }
+    
+    .history-item.reduction {
+      border-left: 4px solid var(--primary);
+    }
+    
+    .history-item .date {
+      font-size: 0.9rem;
+      color: #777;
+    }
+    
+    .history-item .amount {
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .hidden { 
+      display: none; 
+    }
+    
+    .progress-container {
+      margin: 30px 0;
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .progress-bar {
+      height: 30px;
+      background-color: #e0e0e0;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2e7d32, #4caf50);
+      border-radius: 15px;
+      transition: width 0.5s ease;
+    }
+    
+    .progress-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .neutrality-badge {
+      background-color: #f9a825;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(249, 168, 37, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(249, 168, 37, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(249, 168, 37, 0); }
+    }
+    
+    .carbon-impact {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .impact-item {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+    }
+    
+    .impact-item h4 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .impact-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--dark);
+    }
+    
+    @media (max-width: 768px) {
+      .stats-container, .carbon-impact {
+        flex-direction: column;
+      }
+      
+      .card {
+        padding: 20px 15px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🌱 R3foresta Credits</h1>
+      <p>Compensa tu huella de carbono y contribuye a la reforestación del planeta</p>
+    </header>
+    
+    <div class="stats-container">
+      <div class="stat-card">
+        <h3>Huella Actual</h3>
+        <div class="stat-value" id="currentFootprint">150 ton</div>
+      </div>
+      
+      <div class="stat-card">
+        <h3>Total Compensado</h3>
+        <div class="stat-value" id="totalCompensated">0 ton</div>
+      </div>
+      
+      <div class="stat-card">
+        <h3>Bonos Comprados</h3>
+        <div class="stat-value" id="totalPurchases">0</div>
+      </div>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-header">
+        <span>Progreso hacia la neutralidad</span>
+        <span id="progressPercentage">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        <div class="progress-label" id="progressLabel">0%</div>
+      </div>
+      <div id="neutralityBadge" class="neutrality-badge hidden">
+        🎉 ¡Felicidades! Has alcanzado la neutralidad en carbono.
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Compra de Bonos de Carbono</h2>
+      <div class="form-group">
+        <label for="paymentAmount">Monto a pagar en wei:</label>
+        <input type="number" id="paymentAmount" min="0" step="100" value="0" />
+      </div>
+      
+      <div class="info-box">
+        <p>Toneladas de carbono que compensarás: <strong id="elemento">0</strong> ton</p>
+      </div>
+      
+      <button class="btn btn-block" id="submitBuy">
+        Comprar Bonos y Reducir Huella
+      </button>
+      
+      <div class="carbon-impact">
+        <div class="impact-item">
+          <h4>Equivalente a árboles</h4>
+          <div class="impact-value" id="treesEquivalent">0</div>
+        </div>
+        <div class="impact-item">
+          <h4>Autos retirados</h4>
+          <div class="impact-value" id="carsEquivalent">0</div>
+        </div>
+        <div class="impact-item">
+          <h4>CO₂ compensado</h4>
+          <div class="impact-value" id="co2Equivalent">0 kg</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Evolución de tu Huella de Carbono</h2>
+      <div class="chart-container">
+        <canvas id="footprintChart"></canvas>
+      </div>
+    </div>
+    
+    <div class="footprint-history">
+      <h3 class="history-title">Historial de Reducciones</h3>
+      <div id="historyList">
+        <!-- Historial se generará dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Datos iniciales del usuario
+    let carbonFootprint = 150; // Huella inicial en toneladas
+    let totalCompensated = 0; // Total compensado
+    let purchaseCount = 0; // Contador de compras
+    let footprintHistory = [
+      { date: new Date(), footprint: carbonFootprint, reduction: 0 }
+    ];
+    
+    // Referencias a elementos del DOM
+    const currentFootprintEl = document.getElementById('currentFootprint');
+    const totalCompensatedEl = document.getElementById('totalCompensated');
+    const totalPurchasesEl = document.getElementById('totalPurchases');
+    const historyListEl = document.getElementById('historyList');
+    const progressFillEl = document.getElementById('progressFill');
+    const progressLabelEl = document.getElementById('progressLabel');
+    const progressPercentageEl = document.getElementById('progressPercentage');
+    const neutralityBadgeEl = document.getElementById('neutralityBadge');
+    const treesEquivalentEl = document.getElementById('treesEquivalent');
+    const carsEquivalentEl = document.getElementById('carsEquivalent');
+    const co2EquivalentEl = document.getElementById('co2Equivalent');
+    
+    // Actualizar estadísticas
+    function updateStats() {
+      currentFootprintEl.textContent = `${carbonFootprint.toFixed(2)} ton`;
+      totalCompensatedEl.textContent = `${totalCompensated.toFixed(2)} ton`;
+      totalPurchasesEl.textContent = purchaseCount;
+      
+      // Actualizar equivalentes
+      treesEquivalentEl.textContent = Math.round(totalCompensated * 16.5); // 1 árbol absorbe ~60kg CO2 al año
+      carsEquivalentEl.textContent = (totalCompensated / 4.6).toFixed(1); // 1 auto emite ~4.6 ton/año
+      co2EquivalentEl.textContent = (totalCompensated * 1000).toFixed(0); // Convertir a kg
+    }
+    
+    // Actualizar barra de progreso
+    function updateProgress() {
+      const initialFootprint = 150;
+      const compensated = initialFootprint - carbonFootprint;
+      const percentage = (compensated / initialFootprint) * 100;
+      const displayPercentage = Math.min(100, Math.max(0, percentage)).toFixed(1);
+      
+      progressFillEl.style.width = `${displayPercentage}%`;
+      progressLabelEl.textContent = `${displayPercentage}%`;
+      progressPercentageEl.textContent = `${displayPercentage}%`;
+      
+      if (carbonFootprint <= 0) {
+        neutralityBadgeEl.classList.remove('hidden');
+      } else {
+        neutralityBadgeEl.classList.add('hidden');
+      }
+    }
+    
+    // Inicializar gráfico
+    const ctx = document.getElementById('footprintChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Inicio'],
+        datasets: [{
+          label: 'Huella de Carbono (ton)',
+          data: [150],
+          borderColor: '#2e7d32',
+          backgroundColor: 'rgba(46, 125, 50, 0.1)',
+          borderWidth: 3,
+          pointBackgroundColor: '#f9a825',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          tension: 0.3,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 160,
+            title: {
+              display: true,
+              text: 'Toneladas de CO2'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Tiempo'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Reducción de Huella de Carbono',
+            font: {
+              size: 16
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `Huella: ${context.parsed.y.toFixed(2)} ton`;
+              },
+              footer: function(tooltipItems) {
+                const index = tooltipItems[0].dataIndex;
+                if (index > 0) {
+                  const reduction = footprintHistory[index].reduction;
+                  return `Reducción: -${reduction.toFixed(2)} ton`;
+                }
+                return '';
+              }
+            }
+          }
+        }
+      }
+    });
+    
+    // Actualizar gráfico con datos históricos
+    function updateChart() {
+      const labels = footprintHistory.map((entry, index) => 
+        index === 0 ? 'Inicio' : `Compra ${index}`
+      );
+      
+      const data = footprintHistory.map(entry => entry.footprint);
+      
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = data;
+      chart.update();
+    }
+    
+    // Actualizar historial
+    function updateHistory() {
+      historyListEl.innerHTML = '';
+      
+      // Ordenar histórico del más reciente al más antiguo
+      const sortedHistory = [...footprintHistory].reverse();
+      
+      sortedHistory.slice(0, 5).forEach((entry, index) => {
+        if (index === 0) return; // Saltar el primer elemento (es el actual)
+        
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item reduction';
+        
+        const dateStr = entry.date.toLocaleString();
+        const reduction = sortedHistory[index].reduction;
+        
+        historyItem.innerHTML = `
+          <div>
+            <div class="date">${dateStr}</div>
+            <div>Compra de bonos</div>
+          </div>
+          <div class="amount">-${reduction.toFixed(2)} ton</div>
+        `;
+        
+        historyListEl.appendChild(historyItem);
+      });
+    }
+    
+    // Inicializar estadísticas
+    updateStats();
+    updateProgress();
+    
+    // Cálculo de toneladas al cambiar el monto
+    const paymentAmountInput = document.getElementById('paymentAmount');
+    const elemento = document.getElementById('elemento');
+    
+    paymentAmountInput.addEventListener('input', () => {
+      const weiAmount = parseFloat(paymentAmountInput.value) || 0;
+      
+      // Convertir wei a dólares (1 ETH = $2,500, 1 ETH = 10^18 wei)
+      const ethAmount = weiAmount / 1e18;
+      const dollarAmount = ethAmount * 2500;
+      
+      // Convertir dólares a toneladas (supuesto: $10 compensa 1 tonelada)
+      const toneladas = dollarAmount / 10;
+      elemento.textContent = toneladas.toFixed(2);
+    });
+    
+    // Configuración de Ethereum
+    const contractAddress = "0xa9D8ca2C6FBd457973106f04bDA4655ffCDAa4aA";
+    const abi = [
+      {
+        "inputs": [],
+        "name": "comprarBonos",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [{"internalType":"address","name":"usuario","type":"address"}],
+        "name": "obtenerToneladas",
+        "outputs": [{"internalType":"uint256","name":"","type":"uint256"}],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ];
+    
+    let provider, signer, contract;
+    
+    async function connectWallet() {
+      if (window.ethereum) {
+        provider = new ethers.BrowserProvider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        signer = await provider.getSigner();
+        contract = new ethers.Contract(contractAddress, abi, signer);
+        console.log("Conectado con:", await signer.getAddress());
+      } else {
+        alert("MetaMask no está disponible");
+      }
+    }
+    
+    connectWallet();
+    
+    // Manejar compra de bonos
+    document.getElementById("submitBuy").addEventListener("click", async () => {
+      const valueInWei = document.getElementById("paymentAmount").value;
+      const reduction = parseFloat(elemento.textContent);
+      
+      if (reduction <= 0) {
+        alert("Por favor, ingresa un monto válido para comprar bonos");
+        return;
+      }
+      
+      if (reduction > carbonFootprint) {
+        alert(`No puedes compensar más de ${carbonFootprint.toFixed(2)} toneladas`);
+        return;
+      }
+      
+      try {
+        // Actualizar datos locales
+        carbonFootprint -= reduction;
+        totalCompensated += reduction;
+        purchaseCount++;
+        
+        // Actualizar histórico
+        footprintHistory.push({
+          date: new Date(),
+          footprint: carbonFootprint,
+          reduction: reduction
+        });
+        
+        // Actualizar UI
+        updateStats();
+        updateProgress();
+        updateChart();
+        updateHistory();
+        
+        // Realizar transacción en blockchain
+        const tx = await contract.comprarBonos({ value: valueInWei });
+        await tx.wait();
+        
+        alert(`¡Compra exitosa! Has reducido tu huella en ${reduction.toFixed(2)} toneladas.`);
+        
+        // Resetear formulario
+        paymentAmountInput.value = "0";
+        elemento.textContent = "0";
+        
+      } catch (err) {
+        console.error(err);
+        alert("Error al realizar la compra: " + (err.message || "Consulta la consola para más detalles"));
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+  <!DOCTYPE html>
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+        rel="stylesheet" />
+      
+      <title>R3foresta Credits</title>
+    </head>
+    
+    <body>
+    <script src="../js/authController.js"></script>
+    <script>
+        if (!AuthController.checkAuth()) {
+        }
+    </script>
+      <section class="section__container contract__container" id="contract">
+        
+        <div class="contract__actions">
+          <div class="action-cards">
+            <div class="action-card">
+              <button class="action-toggle" data-target="investForm">
+                <span><i class="ri-coin-line"></i> Invertir en Proyecto</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="investForm" class="action-form hidden">
+                <div class="form-group">
+                  <label for="projectSelect">Proyecto:</label>
+                  <select id="projectSelect">
+                    <option value="">Seleccione un proyecto</option>
+                    <option value="1">Area A</option>
+                    <option value="2">Area B</option>
+                    <option value="3">Area C</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="investmentAmount">Monto a Invertir (Wei):</label>
+                  <input type="number" id="investmentAmount" min="0.1" step="0.1" value="1">
+                </div>
+                <div class="form-group">
+                  <label for="investmentWallet">Wallet de Inversión:</label>
+                  <input type="text" id="investmentWallet" placeholder="0x...">
+                </div>
+                
+                <button class="btn btn--primary" id="submitInvest">
+                  <i class="ri-check-line"></i> Confirmar Inversión
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </section>
+
+      
+  </html>
