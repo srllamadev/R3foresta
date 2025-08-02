@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarbonCapture - Registro de Proyectos de Árboles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --secondary: #4caf50;
+            --light: #e8f5e9;
+            --dark: #1a1a1a;
+            --success: #388e3c;
+            --warning: #f57c00;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+        
+        .logo h1 {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .wallet-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--light);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        
+        .wallet-info i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+        }
+        
+        .card-title i {
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .project-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .project-id {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .project-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .project-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .project-body {
+            padding: 20px;
+        }
+        
+        .project-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .project-detail:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .tree-count {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--success);
+        }
+        
+        .token-badge {
+            background: var(--light);
+            color: var(--primary-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .update-form {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .update-form input {
+            flex: 1;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            color: #555;
+            font-weight: 500;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .contract-info {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            box-shadow: var(--card-shadow);
+            font-family: monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .wallet-info {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-seedling logo-icon"></i>
+                <h1>Carbon<span>Capture</span></h1>
+            </div>
+            <div class="wallet-info">
+                <i class="fas fa-wallet"></i>
+                <span>0x742d35Cc6634C0532925a3b844Bc454e4438f44e</span>
+            </div>
+        </header>
+        
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-plus-circle"></i>
+                    <h2>Registrar Nuevo Proyecto</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectName">Nombre del Proyecto</label>
+                    <input type="text" id="projectName" placeholder="Reforestación Amazonas">
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDate">Fecha de Inicio</label>
+                    <input type="date" id="projectDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="treeCount">Cantidad Inicial de Árboles</label>
+                    <input type="number" id="treeCount" placeholder="5000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Ubicación</label>
+                    <select id="location">
+                        <option value="">Seleccionar ubicación</option>
+                        <option value="amazonas">Amazonas, Colombia</option>
+                        <option value="choco">Chocó, Colombia</option>
+                        <option value="andes">Región Andina</option>
+                        <option value="orinoquia">Orinoquía</option>
+                        <option value="caribe">Caribe Colombiano</option>
+                    </select>
+                </div>
+                
+                <button id="registerBtn">
+                    <i class="fas fa-leaf"></i>
+                    Registrar Proyecto
+                </button>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-sync-alt"></i>
+                    <h2>Actualizar Árboles Vivos</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectSelect">Seleccionar Proyecto</label>
+                    <select id="projectSelect">
+                        <option value="">Seleccione un proyecto</option>
+                        <option value="1">Reforestación Amazonas</option>
+                        <option value="2">Bosque Chocó</option>
+                        <option value="3">Andes Verdes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="yearSelect">Año de Actualización</label>
+                    <select id="yearSelect">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newTreeCount">Nueva Cantidad de Árboles Vivos</label>
+                    <input type="number" id="newTreeCount" placeholder="4500">
+                </div>
+                
+                <button id="updateBtn">
+                    <i class="fas fa-tree"></i>
+                    Actualizar Registro
+                </button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-list"></i>
+                <h2>Proyectos Registrados</h2>
+            </div>
+            
+            <div class="projects-container">
+                <!-- Proyecto 1 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">ID: 1</div>
+                        <div class="project-name">Reforestación Amazonas</div>
+                        <div class="project-date">Inicio: 15/03/2022</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-detail">
+                            <div class="detail-label">Ubicación:</div>
+                            <div>Amazonas, Colombia</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Árboles iniciales:</div>
+                            <div>5,000</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Árboles vivos (2023):</div>
+                            <div class="tree-count">4,850</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Tokens generados:</div>
+                            <div class="token-badge">
+                                <i class="fas fa-coins"></i>
+                                24.25 tCO₂
+                            </div>
+                        </div>
+                        <div class="update-form">
+                            <input type="number" placeholder="Nuevo conteo" value="4850">
+                            <button class="small-btn">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 2 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">ID: 2</div>
+                        <div class="project-name">Bosque Chocó</div>
+                        <div class="project-date">Inicio: 10/07/2021</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-detail">
+                            <div class="detail-label">Ubicación:</div>
+                            <div>Chocó, Colombia</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Árboles iniciales:</div>
+                            <div>3,200</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Árboles vivos (2023):</div>
+                            <div class="tree-count">2,980</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Tokens generados:</div>
+                            <div class="token-badge">
+                                <i class="fas fa-coins"></i>
+                                14.9 tCO₂
+                            </div>
+                        </div>
+                        <div class="update-form">
+                            <input type="number" placeholder="Nuevo conteo" value="2980">
+                            <button class="small-btn">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 3 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">ID: 3</div>
+                        <div class="project-name">Andes Verdes</div>
+                        <div class="project-date">Inicio: 22/05/2023</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-detail">
+                            <div class="detail-label">Ubicación:</div>
+                            <div>Región Andina</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Árboles iniciales:</div>
+                            <div>8,000</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Árboles vivos (2023):</div>
+                            <div class="tree-count">7,920</div>
+                        </div>
+                        <div class="project-detail">
+                            <div class="detail-label">Tokens generados:</div>
+                            <div class="token-badge">
+                                <i class="fas fa-coins"></i>
+                                39.6 tCO₂
+                            </div>
+                        </div>
+                        <div class="update-form">
+                            <input type="number" placeholder="Nuevo conteo" value="7920">
+                            <button class="small-btn">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <h3>16,300</h3>
+                <p>Árboles Registrados</p>
+            </div>
+            <div class="stat-item">
+                <h3>78.75</h3>
+                <p>Toneladas de CO₂</p>
+            </div>
+            <div class="stat-item">
+                <h3>3</h3>
+                <p>Proyectos Activos</p>
+            </div>
+        </div>
+        
+        <div class="contract-info">
+            <h3>Contrato Inteligente (Solidity)</h3>
+            <pre>
+</pre>
+        </div>
+        
+        <footer>
+            <p>CarbonCapture &copy; 2023 | Sistema de Registro de Proyectos de Captura de Carbono</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simulación de funcionalidad
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            const name = document.getElementById('projectName').value;
+            const date = document.getElementById('projectDate').value;
+            const trees = document.getElementById('treeCount').value;
+            const location = document.getElementById('location').value;
+            
+            if(name && date && trees && location !== "") {
+                alert(`Proyecto "${name}" registrado exitosamente con ${trees} árboles en ${location}`);
+                // Aquí iría la interacción con el contrato inteligente
+            } else {
+                alert('Por favor complete todos los campos');
+            }
+        });
+        
+        document.getElementById('updateBtn').addEventListener('click', function() {
+            const project = document.getElementById('projectSelect').value;
+            const year = document.getElementById('yearSelect').value;
+            const count = document.getElementById('newTreeCount').value;
+            
+            if(project && year && count) {
+                alert(`Actualización registrada para el proyecto ${project}: ${count} árboles vivos en ${year}`);
+                // Aquí iría la interacción con el contrato inteligente
+            } else {
+                alert('Por favor complete todos los campos');
+            }
+        });
+        
+        // Actualizar el campo de fecha con la fecha actual por defecto
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('projectDate').value = today;
+    </script>
+</body>
+</html>
