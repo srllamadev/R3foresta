@@ -32,3 +32,23 @@ R3foresta es una plataforma líder en la tokenización de bonos de carbono que a
 Únete a R3foresta y forma parte del futuro de la compensación de carbono: combina innovación tecnológica, compromiso ambiental y oportunidades de inversión en un solo lugar.  
 [Visita la plataforma](https://srllamadev.github.io/R3foresta/) 🌱🚀
 
+## Recursos del proyecto R3foresta
+
+1. **Pitch Deck**  
+   https://www.canva.com/design/DAGu7zMbFS4/Vb1qSSxvlIExnqZt9nUolA/edit?utm_content=DAGu7zMbFS4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+2. **Plataforma desarrollada**  
+   https://srllamadev.github.io/R3foresta/
+
+3. **Repositorio en GitHub**  
+   https://github.com/srllamadev/R3foresta.git
+
+4. **Smart Contracts (Ethereum)**  
+   - `0x1a5dEb421E36cdB5372E50A04A4BAcbeE02E5997`  
+   - `0x109eBF0EEd4422e15bA5c0e53550562A585C5e00`
+
+5. **Diseño UX/UI**  
+   https://www.canva.com/design/DAGu5rq4Ups/x0j1JcxfKt5cnEw-TG1JDA/edit?utm_content=DAGu5rq4Ups&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+6. **Video Pitch (3 min)**  
+   https://youtu.be/v_hbIbaVjs8
