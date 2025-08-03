@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R3foresta Credits</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
+    <style>
+        /* Reset y variables CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #29e073;
+            --primary-dark: #1f9f54;
+            --primary-light: #87f8a9;
+            --accent-color: #e5cc8c;
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --extra-light: #f8fafc;
+            --white: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f7ec 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* TEST: Si ves este color rojo, los CSS están cargando */
+        .test-css {
+            background-color: red !important;
+        }
+
+        /* Contenedor principal */
+        .contract-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contract-container:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Tarjeta de acciones */
+        .action-cards {
+            padding: 20px;
+        }
+
+        .action-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f7fcf9 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(41, 224, 115, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Botón principal */
+        .action-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 18px 25px;
+            background: linear-gradient(90deg, #29e073 0%, #1f9f54 100%);
+            color: white;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-toggle:hover {
+            background: linear-gradient(90deg, #1f9f54 0%, #1a8043 100%);
+        }
+
+        .action-toggle i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .action-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Formulario */
+        .action-form {
+            padding: 25px;
+            background-color: white;
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .action-form.hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #29e073;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(41, 224, 115, 0.2);
+        }
+
+        .form-group p {
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin: 15px 0;
+        }
+
+        .carbon-amount {
+            font-weight: 700;
+            color: #1f9f54;
+            font-size: 1.3rem;
+        }
+
+        /* Barra de progreso */
+        .progress-container {
+            background-color: #e2e8f0;
+            border-radius: 50px;
+            height: 24px;
+            margin: 20px 0 25px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+            height: 100%;
+            width: 60%;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: width 0.8s ease, background 0.5s ease;
+        }
+
+        /* Botón de confirmar */
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #1a8043 0%, #1f9f54 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(41, 224, 115, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #156535 0%, #1a8043 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(41, 224, 115, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Decoraciones */
+        .leaf-decoration {
+            position: absolute;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .leaf-1 {
+            top: 20px;
+            right: 30px;
+            font-size: 120px;
+            transform: rotate(15deg);
+            color: #1f9f54;
+        }
+
+        .leaf-2 {
+            bottom: 30px;
+            left: 20px;
+            font-size: 90px;
+            transform: rotate(-20deg);
+            color: #1f9f54;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .action-toggle {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            
+            .action-form {
+                padding: 20px;
+            }
+            
+            .form-group p {
+                font-size: 1rem;
+            }
+            
+            .carbon-amount {
+                font-size: 1.1rem;
+            }
+            
+            .leaf-1 {
+                font-size: 80px;
+                top: 10px;
+                right: 15px;
+            }
+            
+            .leaf-2 {
+                font-size: 60px;
+                bottom: 15px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decoraciones -->
+    <i class="ri-leaf-fill leaf-decoration leaf-1"></i>
+    <i class="ri-leaf-fill leaf-decoration leaf-2"></i>
+    
+    <!-- Contenedor principal -->
+    <div class="contract-container">
+        <div class="action-cards">
+            <div class="action-card">
+                <button class="action-toggle" onclick="toggleForm()">
+                    <span>
+                        <i class="ri-shopping-bag-line"></i> 
+                        Comprar Bonos de Carbono
+                    </span>
+                    <span class="arrow">▼</span>
+                </button>
+                
+                <div id="buyForm" class="action-form">
+                    <div class="form-group">
+                        <label for="paymentAmount">Monto a pagar (wei):</label>
+                        <input 
+                            type="number" 
+                            id="paymentAmount" 
+                            min="100" 
+                            step="100" 
+                            value="1000"
+                            oninput="updateCarbonCompensation()"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <p>
+                            La inversión par el medio ambiente será 
+                            <span class="carbon-amount" id="carbonAmount"></span>
+                        </p>
+                    </div>
+
+                    
+
+                    <button class="btn-primary" id="submitBtn" onclick="confirmPurchase()">
+                        <i class="ri-check-line"></i>
+                        Confirmar Compra
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      const contractAddress = "0xD52387EDEC935c45C09bA5B9d7B35061393DbCd5"; // ← reemplaza esto
+      
+      const abi = [
+        {
+          "inputs": [{ "internalType": "uint256", "name": "areaId", "type": "uint256" }],
+          "name": "invertir",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "inversor", "type": "address" },
+            { "internalType": "uint256", "name": "areaId", "type": "uint256" }
+          ],
+          "name": "obtenerInversion",
+          "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ];
+
+      let provider, signer, contract;
+
+      async function connectWallet() {
+        if (window.ethereum) {
+          provider = new ethers.BrowserProvider(window.ethereum);
+          await provider.send("eth_requestAccounts", []);
+          signer = await provider.getSigner();
+          const address = await signer.getAddress();
+          document.getElementById("investmentWallet").value = address;
+          contract = new ethers.Contract(contractAddress, abi, signer);
+        } else {
+          alert("Instala MetaMask para continuar");
+        }
+      }
+
+      connectWallet();
+
+      document.getElementById("submitInvest").addEventListener("click", async () => {
+        const area = document.getElementById("projectSelect").value;
+        const amount = document.getElementById("investmentAmount").value;
+
+        if (!area || amount <= 0) {
+          alert("Completa todos los campos correctamente.");
+          return;
+        }
+
+        try {
+          const tx = await contract.invertir(area, {
+            value: ethers.parseUnits(amount, "wei")
+          });
+          await tx.wait();
+          alert("nversión realizada con éxito");
+        } catch (error) {
+          console.error(error);
+          alert("Error al procesar la inversión");
+        }
+      });
+    </script>
+  </body>
+</html>

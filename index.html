@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <title>R3foresta Credits</title>
+</head>
+<body>
+    <script src="../js/authController.js"></script>
+    <script>
+        if (!AuthController.checkAuth()) {
+        }
+    </script>
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="nav__container">
+            <div class="nav__logo">
+                <a href="#">
+                    <img src="img/logo.png" alt="CarbonChain Logo">
+                </a>
+            </div>
+            
+            <ul class="nav__links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Proyectos</a></li>
+                <li><a href="#benefits">Beneficios</a></li>
+                <li><a href="#marketplace">Mercado</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            
+            <a href="login.html" class="nav__owner-btn">
+                <i class="ri-admin-line"></i>
+                <span class="asd2">Acceso Socios</span>
+            </a>
+            
+            <button class="nav__menu__btn">
+                <span class="menu-icon-bar"></span>
+                <span class="menu-icon-bar"></span>
+                <span class="menu-icon-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="home">
+        <div class="section__container">
+            <div class="header__container">
+                <div class="header__content">
+                    <p class="asd1">Líderes en tokenización de bonos de carbono mediante tecnología blockchain</p>
+                    <h1 class="asd">Compensa tu huella ecológica con transparencia</h1>
+                    <div class="header__btns">
+                        <a href="#contract" class="btn btn--primary btn--large">
+                            <i class="ri-shopping-bag-line"></i> Comprar Bonos
+                        </a>
+                        <a href="#contract" class="btn btn--primary btn--large">
+                            <i class="ri-information-line"></i> Comprar Acciones
+                        </a>
+                        <button class="btn btn--secondary btn--large">
+                            <img src="img/grabadora.png"style="width:30px; height:auto;">
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="header__image">
+                    <div class="globe-wrapper">
+                        <canvas id="globe-3d"></canvas>
+                        <canvas id="globe-2d-overlay"></canvas>
+                        <div id="globe-popup-overlay">
+                            <div class="globe-popup"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+          <section class="section__container contract__container" id="contract">
+              <h2 class="section__header">Opera con tus Bonos de Carbono</h2>
+              <p class="section__description">
+                  Compra, vende o gestiona tus bonos tokenizados directamente en blockchain
+              </p>
+              
+                  <div class="action-cards">
+          <div class="action-card">
+              <a href="indexPago4.html" class="action-link">
+                  <div class="action-content">
+                      <i class="ri-shopping-bag-line"></i>
+                      <h3>Comprar Bonos</h3>
+                      <p>Adquiere bonos de carbono tokenizados de proyectos verificados</p>
+                      <span class="action-arrow">→</span>
+                  </div>
+              </a>
+          </div>
+          
+          <div class="action-card">
+              <a href="indexInv2.html" class="action-link">
+                  <div class="action-content">
+                      <i class="ri-coin-line"></i>
+                      <h3>Invertir en Proyecto</h3>
+                      <p>Invierte directamente en proyectos de conservación y reforestación</p>
+                      <span class="action-arrow">→</span>
+                  </div>
+              </a>
+          </div>
+      </div>
+    </section>
+    <section class="section__container destination__container" id="about">
+        <h2 class="section__header">Proyectos Certificados</h2>
+        <p class="section__description">
+            Descubre nuestros proyectos de compensación de carbono verificados
+        </p>
+        <div class="destination__grid">
+            <div class="destination__card">
+                <img src="img/card1.png" alt="reforestación" />
+                <div class="destination__card__details">
+                    <div>
+                        <h4>Reforestación Amazónica</h4>
+                        <p>Amazonas, Brasil</p>
+                    </div>
+                    <div class="destination__ratings">
+                        <span><i class="ri-leaf-fill"></i></span>
+                        120,000 ton CO₂
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--card">Ver Detalles</button>
+            </div>
+            
+            <div class="destination__card">
+                <img src="img/card2.png" alt="energía eólica" />
+                <div class="destination__card__details">
+                    <div>
+                        <h4>Parque Eólico Sierra</h4>
+                        <p>Oaxaca, México</p>
+                    </div>
+                    <div class="destination__ratings">
+                        <span><i class="ri-leaf-fill"></i></span>
+                        85,000 ton CO₂
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--card">Ver Detalles</button>
+            </div>
+            
+            <div class="destination__card">
+                <img src="img/card3.png" alt="energía solar" />
+                <div class="destination__card__details">
+                    <div>
+                        <h4>Granja Solar del Desierto</h4>
+                        <p>Atacama, Chile</p>
+                    </div>
+                    <div class="destination__ratings">
+                        <span><i class="ri-leaf-fill"></i></span>
+                        65,000 ton CO₂
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--card">Ver Detalles</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section__container journey__container" id="benefits">
+        <h2 class="section__header">Compensación de Carbono, ¡la forma fácil!</h2>
+        <p class="section__description">
+            Planificación sin esfuerzo para su estrategia de sostenibilidad
+        </p>
+        <div class="journey__grid">
+            <div class="journey__card">
+                <div class="journey__card__bg">
+                    <span><i class="ri-lock-2-line"></i></span>
+                    <h4>Transparencia Blockchain</h4>
+                </div>
+                <div class="journey__card__content">
+                    <span><i class="ri-lock-2-line"></i></span>
+                    <h4>Registros Inmutables</h4>
+                    <p>
+                        Cada bono de carbono está tokenizado en blockchain, garantizando
+                        trazabilidad completa y prevención de doble contabilidad.
+                    </p>
+                    <button class="btn btn--small btn--primary">Saber más</button>
+                </div>
+            </div>
+
+            <div class="journey__card">
+                <div class="journey__card__bg">
+                    <span><i class="ri-coin-line"></i></span>
+                    <h4>Mercado Global</h4>
+                </div>
+                <div class="journey__card__content">
+                    <span><i class="ri-coin-line"></i></span>
+                    <h4>Liquidez y Accesibilidad</h4>
+                    <p>
+                        Plataforma para comprar, vender o intercambiar bonos de carbono tokenizados 
+                        de forma instantánea, con acceso global 24/7.
+                    </p>
+                    <button class="btn btn--small btn--primary">Saber más</button>
+                </div>
+            </div>
+
+            <div class="journey__card">
+                <div class="journey__card__bg">
+                    <span><i class="ri-shield-check-line"></i></span>
+                    <h4>Certificación Verificada</h4>
+                </div>
+                <div class="journey__card__content">
+                    <span><i class="ri-shield-check-line"></i></span>
+                    <h4>Estándares Internacionales</h4>
+                    <p>
+                        Proyectos que cumplen con estándares exigentes (VCS, Gold Standard) 
+                        y son auditados por terceros independientes.
+                    </p>
+                    <button class="btn btn--small btn--primary">Saber más</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section__container showcase__container" id="marketplace">
+        <div class="showcase__image">
+            <img src="img/arboles.png" alt="tecnología blockchain" />
+        </div>
+        <div class="showcase__content">
+            <h4>Tokenización de Bonos de Carbono con Blockchain</h4>
+            <p>
+                Nuestra plataforma utiliza tecnología blockchain para tokenizar bonos
+                de carbono, creando activos digitales únicos que representan una
+                tonelada de CO₂ compensado.
+            </p>
+            <p>
+                Cada token está respaldado por proyectos reales de reducción de emisiones, 
+                con certificación verificada y trazabilidad completa desde su origen.
+            </p>
+            <div class="showcase__btn">
+                <button class="btn btn--primary btn--large">
+                    Acceder al Mercado
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section__container discover__container">
+        <h2 class="section__header">
+            Descubre el Futuro de la Compensación de Carbono
+        </h2>
+        <p class="section__description">
+            Tecnología innovadora para un impacto ambiental real y medible
+        </p>
+        <div class="discover__grid">
+            <div class="discover__card">
+                <span><i class="ri-fingerprint-line"></i></span>
+                <h4>Trazabilidad Total</h4>
+                <p>
+                    Historial inmutable en blockchain para rastrear el impacto real de tu compensación.
+                </p>
+                <button class="btn btn--small btn--outline">Leer más</button>
+            </div>
+            <div class="discover__card">
+                <span><i class="ri-exchange-dollar-line"></i></span>
+                <h4>Mercado Secundario</h4>
+                <p>
+                    Negociación de bonos tokenizados en un mercado líquido de activos ambientales.
+                </p>
+                <button class="btn btn--small btn--outline">Leer más</button>
+            </div>
+            <div class="discover__card">
+                <span><i class="ri-smartphone-line"></i></span>
+                <h4>Acceso Global</h4>
+                <p>
+                    Plataforma accesible desde cualquier dispositivo con conexión a internet.
+                </p>
+                <button class="btn btn--small btn--outline">Leer más</button>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="section__container footer__container">
+            <div class="footer__col">
+                <p>
+                    Líderes en tokenización de bonos de carbono mediante tecnología
+                    blockchain. Transformando la compensación ambiental con transparencia
+                    e innovación.
+                </p>
+                <ul class="footer__socials">
+                    <li><a href="#"><i class="ri-facebook-fill"></i></a></li>
+                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                    <li><a href="#"><i class="ri-linkedin-fill"></i></a></li>
+                    <li><a href="#"><i class="ri-twitter-x-line"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Enlaces Rápidos</h4>
+                <ul class="footer__links">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Proyectos</a></li>
+                    <li><a href="#marketplace">Mercado</a></li>
+                    <li><a href="#benefits">Beneficios</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Contacto</h4>
+                <ul class="footer__links">
+                    <li>
+                        <a href="#">
+                            <i class="ri-phone-fill"></i> +591 60672941
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ri-mail-line"></i> R3foresta.io
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ri-map-pin-2-fill"></i> Santa Cruz, Bolivia
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Boletín</h4>
+                <form action="#">
+                    <input type="text" placeholder="Ingresa tu email" />
+                    <button class="btn btn--primary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer__bar">
+            Copyright © 2025 R3foresta. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script type="x-shader/x-fragment" id="fragment-shader-map">
+        uniform sampler2D u_map_tex;
+        uniform sampler2D u_forest_tex;
+        
+        varying float vOpacity;
+        varying vec2 vUv;
+        
+        void main() {
+            vec3 forestData = texture2D(u_forest_tex, vUv).rgb;
+            
+            vec3 finalColor;
+            if (forestData.r > 0.7) {
+                finalColor = vec3(0.298, 0.686, 0.314);
+            } else if (forestData.g > 0.6) {
+                finalColor = vec3(0.957, 0.263, 0.212);
+            } else {
+                finalColor = texture2D(u_map_tex, vUv).rgb;
+            }
+            
+            float dist = length(gl_PointCoord.xy - vec2(0.5));
+            if (dist > 0.5) {
+                discard;
+            }
+            
+            finalColor -= 0.15 * dist;
+            
+            gl_FragColor = vec4(finalColor, vOpacity);
+        }
+    </script>
+
+    <script type="x-shader/x-vertex" id="vertex-shader-map">
+        uniform sampler2D u_map_tex;
+        uniform float u_dot_size;
+        uniform float u_time_since_click;
+        uniform vec3 u_pointer;
+        
+        #define PI 3.14159265359
+        
+        varying float vOpacity;
+        varying vec2 vUv;
+        
+        void main() {
+            vUv = uv;
+            
+            float visibility = step(0.2, texture2D(u_map_tex, uv).r);
+            gl_PointSize = visibility * u_dot_size;
+            
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            vOpacity = (1.0 / length(mvPosition.xyz) - 0.7);
+            vOpacity = clamp(vOpacity, 0.03, 1.0);
+            
+            float t = u_time_since_click - 0.1;
+            t = max(0.0, t);
+            float max_amp = 0.15;
+            float dist = 1.0 - 0.5 * length(position - u_pointer);
+            float damping = 1.0 / (1.0 + 20.0 * t);
+            float delta = max_amp * damping * sin(5.0 * t * (1.0 + 2.0 * dist) - PI);
+            delta *= 1.0 - smoothstep(0.8, 1.0, dist);
+            vec3 pos = position;
+            pos *= (1.0 + delta);
+            
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+    </script>
+
+    <!-- SCRIPTS DEL GLOBO Y FUNCIONALIDAD -->
+    <script type="module">
+        // Código del globo terráqueo
+        import * as THREE from "https://cdn.skypack.dev/three@0.133.1/build/three.module";
+        import { OrbitControls } from "https://cdn.skypack.dev/three@0.133.1/examples/jsm/controls/OrbitControls";
+        import gsap from "https://cdn.skypack.dev/gsap@3.7.0";
+        
+        const containerEl = document.querySelector(".globe-wrapper");
+        const canvas3D = containerEl.querySelector("#globe-3d");
+        const canvas2D = containerEl.querySelector("#globe-2d-overlay");
+        const popupEl = containerEl.querySelector(".globe-popup");
+        
+        let renderer, scene, camera, rayCaster, controls;
+        let overlayCtx = canvas2D.getContext("2d");
+        let coordinates2D = [0, 0];
+        let pointerPos;
+        let clock, mouse, pointer, globe, globeMesh;
+        let popupVisible;
+        let earthTexture, forestTexture, mapMaterial;
+        let popupOpenTl, popupCloseTl;
+        
+        let dragged = false;
+        
+        // Coordenadas de las principales zonas boscosas (verde) y deforestadas (rojo)
+        const forestAreas = [
+            { lat: -3.465, long: -62.215, size: 0.12, color: 0x4CAF50 },
+            { lat: -2.163, long: -71.950, size: 0.10, color: 0x4CAF50 },
+            { lat: -1.456, long: -78.120, size: 0.09, color: 0x4CAF50 },
+            { lat: 0.565, long: 20.879, size: 0.14, color: 0x4CAF50 },
+            { lat: -2.876, long: 23.656, size: 0.12, color: 0x4CAF50 },
+            { lat: -2.548, long: 118.014, size: 0.11, color: 0x4CAF50 },
+            { lat: 0.789, long: 113.921, size: 0.10, color: 0x4CAF50 },
+            { lat: 48.775, long: -121.834, size: 0.09, color: 0x4CAF50 },
+            { lat: 45.372, long: -122.583, size: 0.08, color: 0x4CAF50 },
+            { lat: 44.058, long: -71.081, size: 0.07, color: 0x4CAF50 },
+            { lat: 62.521, long: 96.226, size: 0.15, color: 0x4CAF50 },
+            { lat: 67.467, long: 86.565, size: 0.14, color: 0x4CAF50 },
+        ];
+        
+        const deforestedAreas = [
+            { lat: -7.257, long: -55.225, size: 0.08, color: 0xF44336 },
+            { lat: -9.974, long: -56.086, size: 0.09, color: 0xF44336 },
+            { lat: -0.502, long: 101.447, size: 0.07, color: 0xF44336 },
+            { lat: 1.565, long: 109.876, size: 0.08, color: 0xF44336 },
+            { lat: 3.202, long: 19.187, size: 0.07, color: 0xF44336 },
+            { lat: -6.369, long: 14.245, size: 0.06, color: 0xF44336 },
+            { lat: -19.566, long: 46.731, size: 0.05, color: 0xF44336 },
+            { lat: 15.870, long: 106.624, size: 0.06, color: 0xF44336 },
+        ];
+        
+        const fixedPoints = [
+            { lat: 40, long: 183, name: "Madrid", color: 0x9C27B0 },
+            { lat: 44, long: 167, name: "Milán", color: 0x9C27B0 },
+            { lat: 41, long: 165, name: "Roma", color: 0x9C27B0 },
+            { lat: 39, long: 257, name: "Washington", color: 0x9C27B0 },
+            { lat: 10, long: 258, name: "Panamá", color: 0x9C27B0 }
+        ];
+        
+        initScene();
+        window.addEventListener("resize", updateSize);
+        
+        function initScene() {
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: canvas3D, 
+                alpha: true,
+                antialias: true
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            scene = new THREE.Scene();
+            scene.background = null;
+            
+            camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+            camera.position.z = 2.5;
+            
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            rayCaster = new THREE.Raycaster();
+            rayCaster.far = 2.5;
+            mouse = new THREE.Vector2(-1, -1);
+            clock = new THREE.Clock();
+            
+            createOrbitControls();
+            
+            popupVisible = false;
+            
+            const textureLoader = new THREE.TextureLoader();
+            
+            textureLoader.load(
+                "https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg",
+                (mapTex) => {
+                    earthTexture = mapTex;
+                    earthTexture.wrapS = earthTexture.wrapT = THREE.RepeatWrapping;
+                    earthTexture.repeat.set(1, 1);
+                    
+                    createForestTexture().then(customTex => {
+                        forestTexture = customTex;
+                        createGlobe();
+                        createPointer();
+                        createPopupTimelines();
+                        addCanvasEvents();
+                        updateSize();
+                        addFixedMarkers();
+                        addForestMarkers();
+                        addDeforestedMarkers();
+                        render();
+                    });
+                }
+            );
+        }
+        
+        function createForestTexture() {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 2048;
+                canvas.height = 1024;
+                
+                ctx.fillStyle = '#000033';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                function latLongToCanvas(lat, long) {
+                    const x = ((long + 180) % 360) * (canvas.width / 360);
+                    const y = (90 - lat) * (canvas.height / 180);
+                    return {x, y};
+                }
+                
+                ctx.fillStyle = '#00FF00';
+                forestAreas.forEach(area => {
+                    const pos = latLongToCanvas(area.lat, area.long);
+                    ctx.beginPath();
+                    ctx.arc(pos.x, pos.y, area.size * canvas.width, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                
+                ctx.fillStyle = '#FF0000';
+                deforestedAreas.forEach(area => {
+                    const pos = latLongToCanvas(area.lat, area.long);
+                    ctx.beginPath();
+                    ctx.arc(pos.x, pos.y, area.size * canvas.width, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(1, 1);
+                
+                resolve(texture);
+            });
+        }
+        
+        function createOrbitControls() {
+            controls = new OrbitControls(camera, canvas3D);
+            controls.enablePan = false;
+            controls.enableZoom = true;
+            controls.zoomSpeed = 0.5;
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 2.0;
+            controls.maxDistance = 4.0;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
+            
+            let timestamp;
+            controls.addEventListener("start", () => {
+                timestamp = Date.now();
+            });
+            controls.addEventListener("end", () => {
+                dragged = Date.now() - timestamp > 200;
+            });
+        }
+        
+        function createGlobe() {
+            const globeGeometry = new THREE.SphereGeometry(1, 64, 64);
+            
+            mapMaterial = new THREE.ShaderMaterial({
+                vertexShader: document.getElementById("vertex-shader-map").textContent,
+                fragmentShader: document.getElementById("fragment-shader-map").textContent,
+                uniforms: {
+                    u_map_tex: { type: "t", value: earthTexture },
+                    u_forest_tex: { type: "t", value: forestTexture },
+                    u_dot_size: { type: "f", value: 0 },
+                    u_pointer: { type: "v3", value: new THREE.Vector3(0, 0, 1) },
+                    u_time_since_click: { value: 0 },
+                },
+                transparent: true,
+            });
+            
+            globe = new THREE.Points(globeGeometry, mapMaterial);
+            scene.add(globe);
+            
+            globeMesh = new THREE.Mesh(
+                globeGeometry,
+                new THREE.MeshBasicMaterial({
+                    color: 0x222222,
+                    transparent: true,
+                    opacity: 0.05,
+                    visible: false
+                })
+            );
+            scene.add(globeMesh);
+        }
+        
+        function createPointer() {
+            const geometry = new THREE.SphereGeometry(0.02, 16, 16);
+            const material = new THREE.MeshBasicMaterial({
+                color: 0xAC0000,
+                transparent: true,
+                opacity: 0.8,
+            });
+            pointer = new THREE.Mesh(geometry, material);
+            scene.add(pointer);
+        }
+        
+        function addForestMarkers() {
+            forestAreas.forEach((point) => {
+                const latRad = (point.lat * Math.PI) / 180;
+                const longRad = (point.long * Math.PI) / 180;
+                const x = Math.cos(latRad) * Math.cos(longRad);
+                const y = Math.sin(latRad);
+                const z = Math.cos(latRad) * Math.sin(longRad);
+                
+                const markerGeometry = new THREE.SphereGeometry(point.size * 0.8, 16, 16);
+                const markerMaterial = new THREE.MeshBasicMaterial({ 
+                    color: point.color,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                
+                const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+                marker.position.set(x, y, z).normalize();
+                marker.scale.multiplyScalar(1.01);
+                scene.add(marker);
+            });
+        }
+        
+        function addDeforestedMarkers() {
+            deforestedAreas.forEach((point) => {
+                const latRad = (point.lat * Math.PI) / 180;
+                const longRad = (point.long * Math.PI) / 180;
+                const x = Math.cos(latRad) * Math.cos(longRad);
+                const y = Math.sin(latRad);
+                const z = Math.cos(latRad) * Math.sin(longRad);
+                
+                const markerGeometry = new THREE.SphereGeometry(point.size * 0.8, 16, 16);
+                const markerMaterial = new THREE.MeshBasicMaterial({ 
+                    color: point.color,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                
+                const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+                marker.position.set(x, y, z).normalize();
+                marker.scale.multiplyScalar(1.01);
+                scene.add(marker);
+            });
+        }
+        
+        function addFixedMarkers() {
+            const markerGeometry = new THREE.SphereGeometry(0.02, 16, 16);
+            
+            fixedPoints.forEach((point) => {
+                const latRad = (point.lat * Math.PI) / 180;
+                const longRad = (point.long * Math.PI) / 180;
+                const x = Math.cos(latRad) * Math.cos(longRad);
+                const y = Math.sin(latRad);
+                const z = Math.cos(latRad) * Math.sin(longRad);
+                
+                const markerMaterial = new THREE.MeshBasicMaterial({ 
+                    color: point.color,
+                    emissive: point.color,
+                    emissiveIntensity: 0.5
+                });
+                
+                const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+                marker.position.set(x, y, z).normalize();
+                marker.scale.multiplyScalar(1.02);
+                marker.userData = { name: point.name };
+                scene.add(marker);
+            });
+        }
+        
+        function updateOverlayGraphic() {
+            let activePointPosition = pointer.position.clone();
+            activePointPosition.applyMatrix4(globe.matrixWorld);
+            const activePointPositionProjected = activePointPosition.clone();
+            activePointPositionProjected.project(camera);
+            coordinates2D[0] =
+                (activePointPositionProjected.x + 1) * containerEl.offsetWidth * 0.5;
+            coordinates2D[1] =
+                (1 - activePointPositionProjected.y) * containerEl.offsetHeight * 0.5;
+            
+            const matrixWorldInverse = controls.object.matrixWorldInverse;
+            activePointPosition.applyMatrix4(matrixWorldInverse);
+            
+            if (activePointPosition.z > -1) {
+                if (!popupVisible) {
+                    popupVisible = true;
+                    showPopupAnimation(false);
+                }
+                
+                let popupX = coordinates2D[0];
+                popupX -= activePointPositionProjected.x * containerEl.offsetWidth * 0.3;
+                
+                let popupY = coordinates2D[1];
+                const upDown = activePointPositionProjected.y > 0.6;
+                popupY += upDown ? 20 : -20;
+                
+                gsap.set(popupEl, {
+                    x: popupX,
+                    y: popupY,
+                    xPercent: -35,
+                    yPercent: upDown ? 0 : -100,
+                });
+                
+                popupY += upDown ? -5 : 5;
+                const curveMidX = popupX + activePointPositionProjected.x * 100;
+                const curveMidY = popupY + (upDown ? -0.5 : 0.1) * coordinates2D[1];
+                
+                drawPopupConnector(
+                    coordinates2D[0],
+                    coordinates2D[1],
+                    curveMidX,
+                    curveMidY,
+                    popupX,
+                    popupY
+                );
+            } else {
+                if (popupVisible) {
+                    popupOpenTl.pause(0);
+                    popupCloseTl.play(0);
+                }
+                popupVisible = false;
+            }
+        }
+        
+        function addCanvasEvents() {
+            containerEl.addEventListener("mousemove", (e) => {
+                updateMousePosition(e.clientX, e.clientY);
+            });
+            
+            containerEl.addEventListener("click", (e) => {
+                if (!dragged) {
+                    updateMousePosition(
+                        e.targetTouches ? e.targetTouches[0].pageX : e.clientX,
+                        e.targetTouches ? e.targetTouches[0].pageY : e.clientY
+                    );
+                    
+                    const res = checkIntersects();
+                    if (res.length) {
+                        pointerPos = res[0].point.clone();
+                        pointer.position.copy(pointerPos);
+                        mapMaterial.uniforms.u_pointer.value = pointerPos;
+                        
+                        const latLong = cartesianToLatLong();
+                        let locationInfo = latLong;
+                        
+                        if (res[0].object.userData && res[0].object.userData.name) {
+                            locationInfo = `${res[0].object.userData.name}<br>${latLong}`;
+                        }
+                        
+                        popupEl.innerHTML = locationInfo;
+                        showPopupAnimation(true);
+                        clock.start();
+                    }
+                }
+            });
+            
+            function updateMousePosition(eX, eY) {
+                const rect = containerEl.getBoundingClientRect();
+                mouse.x = ((eX - rect.left) / containerEl.offsetWidth) * 2 - 1;
+                mouse.y = -((eY - rect.top) / containerEl.offsetHeight) * 2 + 1;
+            }
+        }
+        
+        function checkIntersects() {
+            rayCaster.setFromCamera(mouse, camera);
+            const intersects = rayCaster.intersectObjects(scene.children);
+            
+            const validIntersects = intersects.filter(item => 
+                item.object.material && 
+                (item.object !== globe && item.object !== globeMesh)
+            );
+            
+            document.body.style.cursor = validIntersects.length ? "pointer" : "auto";
+            return validIntersects;
+        }
+        
+        function render() {
+            mapMaterial.uniforms.u_time_since_click.value = clock.getElapsedTime();
+            
+            if (pointer) {
+                updateOverlayGraphic();
+            }
+            
+            controls.update();
+            renderer.render(scene, camera);
+            requestAnimationFrame(render);
+        }
+        
+        function updateSize() {
+            const minSide = Math.min(containerEl.offsetWidth, containerEl.offsetHeight);
+            containerEl.style.width = minSide + "px";
+            containerEl.style.height = minSide + "px";
+            
+            renderer.setSize(minSide, minSide);
+            canvas2D.width = minSide;
+            canvas2D.height = minSide;
+            
+            camera.aspect = 1;
+            camera.updateProjectionMatrix();
+            
+            mapMaterial.uniforms.u_dot_size.value = 0.02 * minSide;
+        }
+        
+        function cartesianToLatLong() {
+            const pos = pointer.position;
+            const lat = 90 - Math.acos(pos.y) * 180 / Math.PI;
+            const lng = (270 + Math.atan2(pos.x, pos.z) * 180 / Math.PI) % 360 - 180;
+            return formatCoordinate(lat, "N", "S") + ", " + formatCoordinate(lng, "E", "W");
+        }
+        
+        function formatCoordinate(coordinate, positiveDirection, negativeDirection) {
+            const direction = coordinate >= 0 ? positiveDirection : negativeDirection;
+            return `${Math.abs(coordinate).toFixed(2)}° ${direction}`;
+        }
+        
+        function createPopupTimelines() {
+            popupOpenTl = gsap.timeline({ paused: true })
+                .to(pointer.material, { duration: 0.2, opacity: 1 }, 0)
+                .fromTo(canvas2D, { opacity: 0 }, { duration: 0.3, opacity: 1 }, 0.15)
+                .fromTo(popupEl, { 
+                    opacity: 0, 
+                    scale: 0.9 
+                }, { 
+                    duration: 0.2, 
+                    opacity: 1, 
+                    scale: 1 
+                }, 0.2);
+            
+            popupCloseTl = gsap.timeline({ paused: true })
+                .to(pointer.material, { duration: 0.2, opacity: 0 }, 0)
+                .to(canvas2D, { duration: 0.2, opacity: 0 }, 0)
+                .to(popupEl, { 
+                    duration: 0.2, 
+                    opacity: 0, 
+                    scale: 0.9 
+                }, 0);
+        }
+        
+        function showPopupAnimation(lifted) {
+            if (lifted) {
+                let positionLifted = pointer.position.clone();
+                positionLifted.multiplyScalar(1.3);
+                gsap.from(pointer.position, {
+                    duration: 0.25,
+                    x: positionLifted.x,
+                    y: positionLifted.y,
+                    z: positionLifted.z,
+                    ease: "power3.out"
+                });
+            }
+            popupCloseTl.pause(0);
+            popupOpenTl.play(0);
+        }
+        
+        function drawPopupConnector(startX, startY, midX, midY, endX, endY) {
+            overlayCtx.clearRect(0, 0, containerEl.offsetWidth, containerEl.offsetHeight);
+            
+            overlayCtx.strokeStyle = "#ffffff";
+            overlayCtx.lineWidth = 2;
+            overlayCtx.lineCap = "round";
+            overlayCtx.beginPath();
+            overlayCtx.moveTo(startX, startY);
+            overlayCtx.quadraticCurveTo(midX, midY, endX, endY);
+            overlayCtx.stroke();
+        }
+    </script>
+    
+    <script>
+        // Funciones para el control de la UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle de los formularios
+            const toggles = document.querySelectorAll('.action-toggle');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const target = document.getElementById(targetId);
+                    target.classList.toggle('hidden');
+                    
+                    // Rotar la flecha
+                    const arrow = this.querySelector('.arrow');
+                    arrow.textContent = target.classList.contains('hidden') ? '▼' : '▲';
+                });
+            });
+            
+            // Conectar wallet
+            const connectWalletBtn = document.getElementById('connectWallet');
+            const walletInfo = document.getElementById('walletInfo');
+            
+            connectWalletBtn.addEventListener('click', function() {
+                // Simulación de conexión a wallet
+                walletInfo.classList.remove('hidden');
+                document.getElementById('walletAddress').textContent = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+                document.getElementById('walletBalance').textContent = '3.42';
+            });
+            
+            // Actualizar precio estimado
+            const bonoAmount = document.getElementById('bonoAmount');
+            bonoAmount.addEventListener('input', function() {
+                const amount = this.value || 0;
+                const price = amount * 0.05; // 0.05 ETH por bono
+                document.getElementById('buyPriceEstimate').textContent = price.toFixed(2);
+            });
+        });
+        
+        function startVoiceAssistant() {
+            alert("Asistente de voz activado. Di 'comprar bonos' o 'invertir en proyecto' para comenzar.");
+        }
+    </script>
+</body>
+</html>

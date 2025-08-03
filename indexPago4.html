@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>R3foresta Credits</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+    
+  </head>
+  <body>
+
+    <section class="section__container contract__container" id="contract">
+      <div class="contract__actions">
+        <div class="action-cards">
+          <div class="action-card">
+            <button class="action-toggle" data-target="buyForm">
+              <span><i class="ri-shopping-bag-line"></i> Comprar Bonos</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div id="buyForm" class="action-form">
+              <div class="form-group">
+                <label for="paymentAmount">Monto a pagar:</label>
+                <input type="number" id="paymentAmount" min="100" step="100" value="100" />
+              </div>
+              <div class="form-group">
+                <p>Toneladas de carbono a compensar: <span id="elemento">0</span></p>
+              </div>
+
+              <!-- NUEVO: Barra de progreso -->
+              <div>
+                <p>Tu huella de carbono actual:</p>
+                <div class="progress-container">
+                  <div id="carbonBar" class="progress-bar">150 t</div>
+                </div>
+              </div>
+
+              <button class="btn btn--primary" id="submitBuy">
+                <i class="ri-check-line"></i> Confirmar Compra
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const contractAddress = "0x1a5dEb421E36cdB5372E50A04A4BAcbeE02E5997";
+      const abi = [
+        {
+          "inputs": [],
+          "name": "comprarBonos",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [{"internalType":"address","name":"usuario","type":"address"}],
+          "name": "obtenerToneladas",
+          "outputs": [{"internalType":"uint256","name":"","type":"uint256"}],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ];
+
+      let provider, signer, contract;
+      let huellaTotal = 150; // Valor inicial de huella
+      const elemento = document.getElementById('elemento');
+      const carbonBar = document.getElementById('carbonBar');
+      const paymentAmountInput = document.getElementById('paymentAmount');
+
+      function actualizarBarraHuella() {
+        const porcentaje = Math.max((huellaTotal / 150) * 100, 0);
+        carbonBar.style.width = `${porcentaje}%`;
+        carbonBar.textContent = `${huellaTotal.toFixed(2)} t`;
+      }
+
+      window.onload = () => {
+        paymentAmountInput.value = 0;
+        elemento.textContent = '0';
+        actualizarBarraHuella();
+      };
+
+      paymentAmountInput.addEventListener("input", () => {
+        const wei = parseInt(paymentAmountInput.value) || 0;
+        const toneladas = (wei * 10) / 100;
+        elemento.innerText = toneladas.toFixed(2);
+      });
+
+      async function connectWallet() {
+        if (window.ethereum) {
+          provider = new ethers.BrowserProvider(window.ethereum);
+          await provider.send("eth_requestAccounts", []);
+          signer = await provider.getSigner();
+          contract = new ethers.Contract(contractAddress, abi, signer);
+          console.log("Conectado con:", await signer.getAddress());
+        } else {
+          alert("MetaMask no está disponible");
+        }
+      }
+
+      connectWallet();
+
+      document.getElementById("submitBuy").addEventListener("click", async () => {
+        const valueInWei = parseInt(document.getElementById("paymentAmount").value);
+        const toneladasReducidas = parseFloat(elemento.innerText);
+
+        if (isNaN(valueInWei) || valueInWei <= 0) {
+          alert("Ingresa un monto válido.");
+          return;
+        }
+
+        try {
+          const tx = await contract.comprarBonos({ value: valueInWei });
+          await tx.wait();
+
+          // Reducir huella
+          huellaTotal -= toneladasReducidas;
+          actualizarBarraHuella();
+
+          //alert(`Compra realizada. Has reducido ${toneladasReducidas.toFixed(2)} toneladas de CO₂.`);
+        } catch (err) {
+          console.error(err);
+          alert("Error al realizar la compra");
+        }
+      });
+    </script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
