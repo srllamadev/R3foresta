@@ -2,7 +2,7 @@
 
 R3foresta es una plataforma líder en la tokenización de bonos de carbono que aprovecha la seguridad y transparencia de la tecnología blockchain para facilitar la compensación ecológica a nivel global.
 
-### 🔹 Características principales:
+### 🔹 Características principales
 
 - **Mercado 24/7 sin intermediarios**  
   Compra, vende y gestiona bonos de carbono tokenizados de forma instantánea, con liquidez garantizada en un mercado global.  
@@ -16,7 +16,7 @@ R3foresta es una plataforma líder en la tokenización de bonos de carbono que a
 - **Mercado secundario de activos ambientales**  
   Negocia tus tokens libremente en un ecosistema global y demuestra tu compromiso con la sostenibilidad.
 
-### 🔹 Beneficios adicionales:
+### 🔹 Beneficios adicionales
 
 - **Certificación y auditoría independientes**  
   Garantía de reducción real de emisiones mediante procesos verificados.
