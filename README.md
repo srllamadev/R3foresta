@@ -44,8 +44,10 @@ R3foresta es una plataforma líder en la tokenización de bonos de carbono que a
    https://github.com/srllamadev/R3foresta.git
 
 4. **Smart Contracts (Ethereum)**  
-   - `0x1a5dEb421E36cdB5372E50A04A4BAcbeE02E5997`  
-   - `0x109eBF0EEd4422e15bA5c0e53550562A585C5e00`
+   - `0x1a5dEb421E36cdB5372E50A04A4BAcbeE02E5997`  --> Adquisición de Bonos de Carbono
+   - `0x109eBF0EEd4422e15bA5c0e53550562A585C5e00`  --> Inversión
+
+     https://docs.google.com/document/d/1TDLPhKXxilMd3GphWN29LU4DmM32L5e5936RYexMqnE/edit?usp=sharing
 
 5. **Diseño UX/UI**  
    https://www.canva.com/design/DAGu5rq4Ups/x0j1JcxfKt5cnEw-TG1JDA/edit?utm_content=DAGu5rq4Ups&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
